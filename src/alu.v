@@ -1,26 +1,21 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 07/02/2026 10:56:02 AM
-// Design Name: 
-// Module Name: alu
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
+//arithmetic logic unit
+module alu
+(
+    input signed[31:0] a, b,
+    input[2:0] fxn, //control
+    output reg signed[31:0] c
+);
 
-module alu(
-
-    );
+    always @* begin
+        case (fxn)
+            3'b010: c = a + b; 
+            3'b110: c = a - b; 
+            3'b000: c = a & b; 
+            3'b001: c = a | b; 
+            3'b111: c = a; 
+            default: c = 0;
+        endcase
+    end
 endmodule
