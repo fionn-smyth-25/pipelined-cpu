@@ -14,11 +14,8 @@ module execute
     input[31:0] alu_out_in, result, //from memory stage and writeback stage
     output[31:0] alu_out,
     output reg[31:0] write_data,
-    output[4:0] write_reg, rs_out, rt_out
+    output[4:0] write_reg
 );
-    
-    assign rs_out = rs;
-    assign rt_out = rt;
 
     reg[31:0] a, b;
     

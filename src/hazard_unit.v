@@ -1,26 +1,12 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 07/02/2026 10:56:02 AM
-// Design Name: 
-// Module Name: hazard_unit
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
-
-module hazard_unit(
-
-    );
+module hazard_unit
+(
+    input clk, rst, 
+    input branchD,
+    input reg_writeE, mem_to_regE, reg_writeM, mem_to_regM,  reg_writeW,
+    input[4:0] rsD, rtD, rsE, rtE, write_regE, write_regM, write_regW, 
+    output stallF, stallD, forwardAD, forwardBD, flushE, forwardAE, forwardBE   
+);
+    
 endmodule
