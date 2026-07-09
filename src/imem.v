@@ -10,10 +10,13 @@ module imem
 
     reg[31:0] imem[255:0]; //256 instruction registers
     
-    assign instruction = imem[addr];
+    assign instr = imem[addr];
     
     //load test program
     initial begin
+        for (integer i = 0; i < 256; i = i + 1) begin
+            imem[i] = 32'b0;
+        end
     end
     
 endmodule

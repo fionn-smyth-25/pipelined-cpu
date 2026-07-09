@@ -20,9 +20,8 @@ module top
     
     //datapath
     //fetch stage
-    wire pc_write, branch_control;
     wire[31:0] branch_dest, pc_plus4, instr, instrD, pc_plus4D;
-    ifetch d0 (clk, rst, pc_write, branch_control, branch_dest, pc_plus4, instr);    
+    ifetch d0 (clk, rst, pc_srcD, stallF, branch_dest, pc_plus4, instr);    
     
     //decode stage
     wire equal;
