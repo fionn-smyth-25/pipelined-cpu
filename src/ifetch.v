@@ -20,7 +20,7 @@ module ifetch
     //program counter
     always @ (posedge clk) begin
         if (rst) pc <= 32'b0; 
-        else if (pc_write) pc <= pc_next;
+        else if (!pc_write) pc <= pc_next;
     end
     
     //instruction memory

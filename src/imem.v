@@ -15,7 +15,8 @@ module imem
     //load test program
     initial begin
         for (integer i = 0; i < 256; i = i + 1) begin
-            imem[i] = 32'b0;
+            //            op     rs    rt    imm
+            imem[i] = 32'b001000_00000_00001_0000000000000001;
         end
     end
     

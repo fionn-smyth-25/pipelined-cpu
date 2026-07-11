@@ -20,7 +20,7 @@ module ifetch_idecode_reg
             instr_out <= 32'b0;
             pc_out <= 32'b0;
         end
-        else if (en) begin
+        else if (!en) begin
             instr_out <= instr;
             pc_out <= pc;
         end

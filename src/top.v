@@ -16,7 +16,7 @@ module top
     //control unit
     wire reg_writeD, mem_writeD, reg_dstD, alu_srcD, mem_to_regD, pc_srcD, jumpD;
     wire[2:0] alu_controlD;
-    control_unit c0 (instrD, reg_writeD, mem_writeD, reg_dstD, alu_srcD, mem_to_regD, pc_srcD, jumpD, alu_controlD);
+    control_unit c0 (instrD, reg_writeD, mem_writeD, reg_dstD, alu_srcD, mem_to_regD, pc_srcD, jumpD, branchD, alu_controlD);
     
     //datapath
     //fetch stage

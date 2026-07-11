@@ -3,11 +3,10 @@
 module control_unit
 (
     input[31:0] instruction,
-    output reg_write, mem_write, reg_dst, alu_src, mem_to_reg, pc_src, jump,
+    output reg_write, mem_write, reg_dst, alu_src, mem_to_reg, pc_src, jump, branch,
     output reg[2:0] alu_control
 );
     
-    wire branch;
     wire[1:0] alu_op;
     wire[5:0] func, opcode;
     reg[8:0] controls;
