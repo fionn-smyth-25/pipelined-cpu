@@ -48,6 +48,7 @@ The MIPS ISA contains three instruction types. **Register-Type** instructions us
 | rd    | 5         | destination register                                                                                                    |
 | shamt | 5         | used only in shift operations - indicates the amount of bits by which to shift (is zero for all non shift instructions) |
 | funct | 6         | function code (determines the R-Type operation)                                                                         |
+
 **Immediate-Type** instructions use two registers as operands along with one immediate operand:
 
 | Field | Bit Width | Function                    |
@@ -56,6 +57,7 @@ The MIPS ISA contains three instruction types. **Register-Type** instructions us
 | rs    | 5         | source register             |
 | rt    | 5         | source/destination register |
 | imm   | 16        | immediate value             |
+
 **Jump-Type** instructions are only used with jump instructions:
 
 | Field | Bit Width | Function        |     |
@@ -75,6 +77,7 @@ The MIPS ISA contains three instruction types. **Register-Type** instructions us
 | addi        | I    |
 | beq         | I    |
 | j           | J    |
+
 *MIPS instructions*
 ## Micro-architecture
 The CPU contains 32 general purpose registers, each with a specific purpose:
@@ -93,6 +96,7 @@ The CPU contains 32 general purpose registers, each with a specific purpose:
 | $sp       | 29     | stack pointer          |
 | $fp       | 30     | frame pointer          |
 | $ra       | 31     | function return adress |
+
 *Overview of MIPS registers*
 
 It's important to note that the zero register can never be written too, it will always contain the value zero. The data memory contains 256 addressable locations, as does the instruction memory.
@@ -109,6 +113,7 @@ The control unit computes the control signals based on the opcode and function (
 | mem_to_reg     | Controls whether the value written to a register is from the ALU (R-Type) or from data memory (I-Type)     |
 | jump           | Controls whether a jump instruction is to occur                                                            |
 | alu_op         | Controls the ALU operation performed                                                                       |
+
 *Control Signal Descriptions*
 
 | Opcode | Instruction Name | reg_write | reg_dst | alu_src | branch | mem_write | mem_to_reg | jump | alu_op |
@@ -119,6 +124,7 @@ The control unit computes the control signals based on the opcode and function (
 | 000100 | BEQ              | 0         | 0       | 0       | 1      | 0         | 0          | 0    | 01     |
 | 001000 | ADDI             | 1         | 0       | 1       | 0      | 0         | 0          | 0    | 00     |
 | 000010 | JMP              | 0         | 0       | 0       | 0      | 0         | 0          | 1    | 00     |
+
 *Decoder Truth Table*
 # Design Description
 ## Modules
