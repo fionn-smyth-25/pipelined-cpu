@@ -7,8 +7,9 @@ module top
 );
     
     //hazard unit
-    wire branchD, reg_writeE, mem_to_regE, reg_writeM, mem_to_regM, reg_writeW;
-    wire stallF, stallD, forwardAD, forwardBD, flushE, forwardAE, forwardBE;  
+    wire branchD, reg_writeE, mem_to_regE, reg_writeW;
+    wire stallF, stallD, forwardAD, forwardBD, flushE;  
+    wire[1:0] forwardAE, forwardBE;
     hazard_unit h0 (clk, rst, branchD, reg_writeE, mem_to_regE, reg_writeM, mem_to_regM, reg_writeW,
                     rsD, rtD, rsE, rtE, write_regE, write_regM, write_regW, 
                     stallF, stallD, forwardAD, forwardBD, flushE, forwardAE, forwardBE);
@@ -16,12 +17,12 @@ module top
     //control unit
     wire reg_writeD, mem_writeD, reg_dstD, alu_srcD, mem_to_regD, pc_srcD, jumpD;
     wire[2:0] alu_controlD;
-    control_unit c0 (instrD, reg_writeD, mem_writeD, reg_dstD, alu_srcD, mem_to_regD, pc_srcD, jumpD, branchD, alu_controlD);
+    control_unit c0 (instrD, equal, reg_writeD, mem_writeD, reg_dstD, alu_srcD, mem_to_regD, pc_srcD, jumpD, branchD, alu_controlD);
     
     //datapath
     //fetch stage
     wire[31:0] branch_dest, pc_plus4, instr, instrD, pc_plus4D;
-    ifetch d0 (clk, rst, pc_srcD, stallF, branch_dest, pc_plus4, instr);    
+    ifetch d0 (clk, rst, stallF, pc_srcD, jumpD, instrD[25:0], branch_dest, pc_plus4, instr);    
     
     //decode stage
     wire equal;
@@ -34,11 +35,11 @@ module top
     //execute stage
     wire reg_writeE, mem_writeE, reg_dstE, alu_srcE, mem_to_regE;
     wire[2:0] alu_controlE;
-    wire[4:0] rsE, rtE, rdE;    
+    wire[4:0] rsE, rtE, rdE, write_regE;    
     wire[31:0] reg_data_1E, reg_data_2E, sign_immE;
-    wire[31:0] alu_outE, write_dataE, write_regE;
+    wire[31:0] alu_outE, write_dataE;
     idecode_exe_reg d3 (clk, rst, flushE, reg_writeD, mem_to_regD, mem_writeD, alu_controlD, alu_srcD, reg_dstD, 
-                        reg_data_1, reg_data_2, rs, rt, rd, sign_imm, 
+                        reg_data_1, reg_data_2, rsD, rtD, rdD, sign_imm, 
                         reg_writeE, mem_to_regE, mem_writeE, alu_controlE, alu_srcE, reg_dstE, rsE, rtE, rdE,
                         reg_data_1E, reg_data_2E, sign_immE);
     execute d4 (clk, rst, forwardAE, forwardBE, alu_controlE, alu_srcE, reg_dstE, reg_data_1E, reg_data_2E, rsE, rtE, rdE,
@@ -48,7 +49,7 @@ module top
     wire reg_writeM, mem_to_regM, mem_writeM;
     wire[4:0] write_regM;
     wire[31:0] alu_outM, write_dataM, read_dataM;
-    exe_mem_reg d5 (clk, rst, eg_writeE, mem_to_regE, mem_writeE, write_regE, alu_outE, write_dataE,
+    exe_mem_reg d5 (clk, rst, reg_writeE, mem_to_regE, mem_writeE, write_regE, alu_outE, write_dataE,
                     reg_writeM, mem_to_regM, mem_writeM, write_regM, alu_outM, write_dataM);
     memory d6 (clk, rst, mem_writeM, write_regM, alu_outM, write_dataM, read_dataM);
     

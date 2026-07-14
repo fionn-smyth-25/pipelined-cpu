@@ -3,6 +3,7 @@
 module control_unit
 (
     input[31:0] instruction,
+    input equal,
     output reg_write, mem_write, reg_dst, alu_src, mem_to_reg, pc_src, jump, branch,
     output reg[2:0] alu_control
 );
@@ -23,31 +24,31 @@ module control_unit
     assign jump = controls[2];
     assign alu_op = controls[1:0];
     
-    assign pc_src = branch & 0;
+    assign pc_src = (branch & equal);
     
     always @* begin      
         //main decoder
         case (opcode)
             6'b000000: begin //signals that instruction is R-Type
-                controls <= 9'b110000010;
+                controls = 9'b110000010;
             end
             6'b100011: begin //LW (I-Type)
-                controls <= 9'b101001000;
+                controls = 9'b101001000;
             end       
             6'b101011: begin //SW (I-Type)
-                controls <= 9'b001010000;
+                controls = 9'b001010000;
             end
             6'b000100: begin //BEQ (I-Type)
-                controls <= 9'b000100001;
+                controls = 9'b000100001;
             end
             6'b001000: begin //ADDI (I-Type)
-                controls <= 9'b101000000;
+                controls = 9'b101000000;
             end           
             6'b000010: begin //JMP (J-Type)
-                controls <= 9'b000000100;
+                controls = 9'b000000100;
             end
-            default: begin //illegal op
-                controls <= 9'bxxxxxxxxx;
+            default: begin //illegal op -> no op
+                controls = 9'b000000000;
             end 
         endcase
         

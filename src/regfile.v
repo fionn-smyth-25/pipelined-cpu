@@ -27,7 +27,18 @@ module regfile
             end
         end
         else if (write_en) begin
-            regs[dest_addr] <= write_data;
+            //never write to zero reg
+            if (dest_addr != 5'b0) begin
+                //debug
+                $display(
+                    "REG WRITE: r%0d <= %d at time %0t",
+                    dest_addr,
+                    write_data,
+                    $time
+                );
+                
+                regs[dest_addr] <= write_data;
+            end
         end
     end
 endmodule
