@@ -19,7 +19,7 @@ Pipelining here refers to instruction pipelining. It divides instructions into a
 - **MEM (Memory access)** - write results to the data memory if needed.
 - **WB (Register write back)** - write results back to register file.
 
-This is achieved using pipeline registers. Pipeline registers store important values in between stages, to facilitate multiple instructions simultaneously. 
+This is achieved using pipeline registers. Pipeline registers store important values in between stages, to facilitate multiple instructions simultaneously. Four pipeline registers are inserted between each stage in the data-path.
 
 ```
 Time (ns)      0  10  20  30  40  50  60
@@ -27,12 +27,23 @@ Instruction 1  IF ID  EX  MEM WB
 Instruction 2     IF  ID  EX  MEM WB
 Instruction 3         IF  ID  EX  MEM WB
 ```
+
 *Example of pipelined data timing*
+
+At time zero, the first instruction is fetched from memory, and stored in the pipeline register. Then the next instruction is fetched while the previous instruction is decoded, and so on.
 ## Hazards
 Hazards occur when instructions in a pipeline produce an incorrect answer. This can occur in a couple of ways:
 - When two instructions attempt to use the same resource (registers, ALU, etc.) at the same time.
 - When an instruction attempts to use data in a certain register before that data actually reaches that register.
 - During branching. 
+
+An example of a RAW (read after write) hazard is as follows: 
+
+```
+add $s0, $s2, $s3
+and $t0, $s0, $s1
+```
+The add instruction writes a result into $s0, but $s0 will be read in the very next instruction. Due to the pipeline process, $s0 will be read before the correct value has been written there, so instruction two will produce an incorrect answer. We can solve this hazard by *forwarding* the result of the ALU from the memory/write-back stage to another instruction in the execute stage. 
 
 We can solve these problems by implementing a hazard unit in our design. The processor resolves data hazards through operand forwarding whenever possible. If a write will occur to a register that matches the source register then forwarding is used. If forwarding cannot resolve the dependency (e.g. a load-use hazard), the hazard unit inserts a pipeline stall. Control hazards are handled by flushing instructions following taken branches and jumps.
 # A brief overview of MIPS
