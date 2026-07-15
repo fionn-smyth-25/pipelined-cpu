@@ -33,7 +33,7 @@ module top
                 rsD, rtD, rdD, sign_imm, reg_data_1, reg_data_2, pc_branch, equal);
                     
     //execute stage
-    wire reg_writeE, mem_writeE, reg_dstE, alu_srcE, mem_to_regE;
+    wire mem_writeE, reg_dstE, alu_srcE;
     wire[2:0] alu_controlE;
     wire[4:0] rsE, rtE, rdE, write_regE;    
     wire[31:0] reg_data_1E, reg_data_2E, sign_immE;
