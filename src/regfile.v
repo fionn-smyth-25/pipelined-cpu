@@ -12,6 +12,8 @@ module regfile
     //32 registers each 32 bits wide
     reg[31:0] regs[0:31];
     
+    integer i;
+    
     //load data from up to two selected registers
     //INDEPENDENT OF CLK
     //If the address changes, the new data appears at the output after some propagation delay
@@ -22,7 +24,7 @@ module regfile
     //synchronous active high reset
     always @(posedge clk) begin
         if (rst) begin
-            for (integer i = 0; i < 32; i = i + 1) begin
+            for (i = 0; i < 32; i = i + 1) begin
                 regs[i] <= 32'b0;
             end
         end
