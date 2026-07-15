@@ -71,10 +71,10 @@ The MIPS ISA contains three instruction types. **Register-Type** instructions us
 
 **Jump-Type** instructions are only used with jump instructions:
 
-| Field | Bit Width | Function        |     |
-| ----- | --------- | --------------- | --- |
-| op    | 6         | opcode          |     |
-| imm   | 26        | immediate value |     |
+| Field | Bit Width | Function        | 
+| ----- | --------- | --------------- | 
+| op    | 6         | opcode          |     
+| imm   | 26        | immediate value |     
 
 | Instruction | Type |
 | ----------- | ---- |
