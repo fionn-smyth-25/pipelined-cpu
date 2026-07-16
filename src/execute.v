@@ -5,7 +5,7 @@
 module execute
 (
     input clk, rst, 
-    input[1:0] fowardA, fowardB, //from hazard unit
+    input[1:0] forwardA, forwardB, //from hazard unit
     input[2:0] alu_control, //control unit
     input alu_src, reg_dst, //control unit
     input[31:0] reg_data_1, reg_data_2, //reg file
@@ -26,15 +26,17 @@ module execute
     //originally had clocked logic here which was messing with execute timing
     //also using a mix of <= and = which was bad
     always @ (*) begin 
-            case (fowardA)
-                00: a = reg_data_1;
-                01: a = result;
-                10: a = alu_out_in;
+            case (forwardA)
+                2'b00: a = reg_data_1;
+                2'b01: a = result;
+                2'b10: a = alu_out_in;
+                default: a = reg_data_1;
             endcase
-            case (fowardB)
-                00: write_data = reg_data_2;
-                01: write_data = result;
-                10: write_data = alu_out_in;
+            case (forwardB)
+                2'b00: write_data = reg_data_2;
+                2'b01: write_data = result;
+                2'b10: write_data = alu_out_in;
+                default: write_data = reg_data_2;
             endcase
             //final 2 to 1 mux
             b =  alu_src ? sign_imm : write_data;  

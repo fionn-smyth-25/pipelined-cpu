@@ -29,7 +29,7 @@ module idecode
 
     //decode
     assign rs = instr[25:21];
-    assign rt = instr[21:16];
+    assign rt = instr[20:16];
     assign rd = instr[15:11];
     //extend 16 bit immediate value to 32 bit (MSB gets extended)
     assign sign_imm = {{16{instr[15]}}, instr[15:0]};

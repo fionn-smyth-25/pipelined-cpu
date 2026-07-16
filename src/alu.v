@@ -3,9 +3,9 @@
 //arithmetic logic unit
 module alu
 (
-    input signed[31:0] a, b,
+    input [31:0] a, b,
     input[2:0] fxn, //control
-    output reg signed[31:0] c
+    output reg [31:0] c
 );
 
     always @* begin

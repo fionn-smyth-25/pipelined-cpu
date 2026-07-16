@@ -33,7 +33,7 @@ module regfile
             if (dest_addr != 5'b0) begin
                 //debug
                 $display(
-                    "REG WRITE: r%0d <= %d at time %0t",
+                    "REG WRITE: r%0d <= %h at time %0t",
                     dest_addr,
                     write_data,
                     $time

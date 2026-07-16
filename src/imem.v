@@ -18,7 +18,7 @@ module imem
         for (i = 0; i < 256; i = i + 1) begin
             imem[i] = 32'b0;
         end
-        $readmemb("/hosthome/fpga/vivado_projecrs/pipelined_processor/pipelined_processor.srcs/sources_1/imports/programs/test_prog.mem", imem);
+        $readmemh("/hosthome/fpga/vivado_projecrs/pipelined_processor/pipelined_processor.srcs/sources_1/imports/programs/test_prog.mem", imem);
     end
     
 endmodule
