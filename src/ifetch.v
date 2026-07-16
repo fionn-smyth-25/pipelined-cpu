@@ -34,5 +34,5 @@ module ifetch
     end
     
     //instruction memory
-    imem im0 (pc >> 2, instr);
+    imem im0 (pc, instr);
 endmodule

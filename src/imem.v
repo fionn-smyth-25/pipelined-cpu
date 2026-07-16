@@ -5,13 +5,17 @@
 module imem
 (
     input[31:0] addr,
-    output[31:0] instr
+    output[31:0] instr //instruction word
 );
 
     reg[31:0] imem[255:0]; //256 instruction registers
+    wire[7:0] word_addr;
     integer i;
     
-    assign instr = imem[addr];
+    //word adressing (ignore bottom two bits)
+    assign word_addr = addr[9:2];
+    
+    assign instr = imem[word_addr];
     
     //load test program
     initial begin

@@ -9,9 +9,13 @@ module dmem
 );
 
     reg[31:0] d_mem[255:0];
+    wire[7:0] word_addr;
     integer i;
     
-    assign read_data = d_mem[addr];
+    //word adressing (ignore bottom two bits)
+    assign word_addr = addr[9:2];
+    
+    assign read_data = d_mem[word_addr];
     
     always @ (posedge clk) begin
         if (rst) begin
@@ -20,7 +24,7 @@ module dmem
             end   
         end
         if (write_en) begin
-            d_mem[addr] = write_data;
+            d_mem[word_addr] = write_data;
         end
     end
 endmodule
