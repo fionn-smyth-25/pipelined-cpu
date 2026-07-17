@@ -7,7 +7,7 @@ module cpu_tb;
     top t0 (clk, rst);
     
     //clk period (ns)
-    parameter T = 10;
+    parameter T = 2;
     
     always begin
         clk <= 1'b1;

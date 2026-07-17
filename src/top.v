@@ -3,8 +3,11 @@
 //top module for pipeline cpu
 module top
 (
-    input clk, rst
+    input clk, rst,
+    output debug //debug out for synth/implementation
 );
+
+    assign debug = stallF;
     
     //hazard unit
     wire branchD, reg_writeE, mem_to_regE, reg_writeW;
