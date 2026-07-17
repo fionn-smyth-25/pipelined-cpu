@@ -1,0 +1,20 @@
+//load the string 'HELLO' into registers $t0 through $t4
+//convert to lowercase by adding 0x20h
+//store each letter in the data memory
+00000000 //nop
+21ad0020 //addi $t5, $t5, 0x20
+21080048 //addi $t0, $t0, 0x48
+21290065 //addi $t1, $t1, 0x65
+214a006c //addi $t2, $t2, 0x6c
+216b006c //addi $t3, $t3, 0x6c
+218c006f //addi $t4, $t4, 0x6f
+01a88020 //add  $s0, $t5, $t0
+01a98820 //add  $s1, $t5, $t1
+01aa9020 //add  $s2, $t5, $t2
+01ab9820 //add  $s3, $t5, $t3
+01aca020 //add  $s4, $t5, $t4
+AC100004 //sw   $s0, 0x4
+AC110008 //sw   $s1, 0x8
+AC12000c //sw   $s2, 0x0c
+AC130010 //sw   $s3, 0x10
+AC140014 //sw   $s4, 0x14
