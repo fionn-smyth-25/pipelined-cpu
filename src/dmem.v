@@ -23,8 +23,8 @@ module dmem
                 d_mem[i] <= 32'b0;
             end   
         end
-        if (write_en) begin
-            d_mem[word_addr] = write_data;
+        else if (write_en) begin
+            d_mem[word_addr] <= write_data;
         end
     end
 endmodule
