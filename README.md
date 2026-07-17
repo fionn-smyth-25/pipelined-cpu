@@ -38,7 +38,7 @@ Lets compare the pipelined CPU to a single cycle CPU (you can find the link to m
 
 *Pipelined CPU running upper_to_lower.mem*
 
-![](images/sing_cycle_waveform_1.png)
+![](images/single_cycle_waveform_1.png)
 
 *Single-cycle CPU running upper_to_lower.mem*
 
